@@ -5,7 +5,9 @@ export default function LayoutRoute() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main className="px-6">
+        <Outlet />
+      </main>
     </>
   );
 }
