@@ -1,5 +1,8 @@
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import reward from "../assets/medal-front-color.png";
+import watchlist from "../assets/camera-front-color.png";
+import timer from "../assets/clock-front-color.png";
 
 export default function Home() {
   const transition = {
@@ -35,7 +38,7 @@ export default function Home() {
         >
           <button
             className="bg-blue-500 text-white px-6 py-2 rounded-3xl mt-10 cursor-pointer font-inter text-lg hover:bg-blue-600 transition-all duration-200"
-            onClick={() => navigate("/timer")}
+            onClick={() => navigate("timer")}
           >
             Get Started
           </button>
@@ -55,26 +58,13 @@ export default function Home() {
             }}
             className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center shadow-md transition-all duration-200 border border-gray-100"
           >
-            <span className="text-blue-500 text-5xl mb-4">
-              <i className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-12 h-12"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v6l4 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </i>
-            </span>
+            <img
+              src={timer}
+              alt="3D Picture of an alarm clock"
+              className="w-12 h-12 mb-4"
+            />
             <h3 className="font-semibold text-xl mb-2 text-center">
-              🕓 Stay Focused with the Built-in Pomodoro Timer
+              Stay Focused with the Built-in Pomodoro Timer
             </h3>
             <ul className="text-gray-700 text-left list-disc pl-5 space-y-1">
               <li>Customize work and break durations</li>
@@ -90,32 +80,18 @@ export default function Home() {
             }}
             className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center shadow-md transition-all duration-200 border border-gray-100"
           >
-            <span className="text-pink-500 text-5xl mb-4">
-              <i className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-12 h-12"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.5 3.75v16.5m0 0l-7.5-7.5m7.5 7.5l7.5-7.5"
-                  />
-                </svg>
-              </i>
-            </span>
+            <img
+              src={watchlist}
+              alt="picture of 3d camera from the front"
+              className="w-12 h-12 mb-4"
+            />
             <h3 className="font-semibold text-xl mb-2 text-center">
-              🎥 Build and Manage Your Watchlist
+              Build and Manage Your Watchlist
             </h3>
             <ul className="text-gray-700 text-left list-disc pl-5 space-y-1">
-              <li>Search for movies and shows using TMDB</li>
+              <li>Search for movies and shows</li>
               <li>Add them to your to-watch list with a single click</li>
-              <li>Mark content as watched and rate it afterward</li>
-              <li>Add personal notes or custom tags</li>
+              <li>Use tokens to unlock movies in your watchlist</li>
             </ul>
           </motion.div>
           {/* Reward Yourself */}
@@ -126,26 +102,13 @@ export default function Home() {
             }}
             className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center shadow-md transition-all duration-200 border border-gray-100"
           >
-            <span className="text-yellow-500 text-5xl mb-4">
-              <i className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-12 h-12"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 17.25l6.16 3.24-1.18-6.88 5-4.87-6.91-1-3.09-6.26-3.09 6.26-6.91 1 5 4.87-1.18 6.88L12 17.25z"
-                  />
-                </svg>
-              </i>
-            </span>
+            <img
+              src={reward}
+              alt="3D Picture of a medal"
+              className="w-12 h-12 mb-4"
+            />
             <h3 className="font-semibold text-xl mb-2 text-center">
-              🎁 Reward Yourself
+              Reward Yourself
             </h3>
             <ul className="text-gray-700 text-left list-disc pl-5 space-y-1">
               <li>
