@@ -4,7 +4,7 @@ import { RxLapTimer } from "react-icons/rx";
 export default function Navbar() {
   const navigate = useNavigate();
   return (
-    <header className="font-inter flex justify-between items-center px-6 py-6 fixed top-0 left-0 right-0 z-10 bg-white">
+    <header className="font-inter flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 z-10 bg-white">
       <div
         className="text-3xl flex items-center justify-center gap-2 cursor-pointer text-gray-900"
         onClick={() => navigate("/")}
