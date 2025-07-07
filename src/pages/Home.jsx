@@ -31,18 +31,12 @@ export default function Home() {
           Work smart. Watch guilt-free. Track your progress and enjoy screen
           time - when you've earned it.
         </p>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={transition}
+        <button
+          className="bg-blue-500 text-white px-6 py-2 rounded-3xl mt-10 cursor-pointer font-inter text-lg hover:bg-blue-600 transition-all duration-200"
+          onClick={() => navigate("timer")}
         >
-          <button
-            className="bg-blue-500 text-white px-6 py-2 rounded-3xl mt-10 cursor-pointer font-inter text-lg hover:bg-blue-600 transition-all duration-200"
-            onClick={() => navigate("timer")}
-          >
-            Get Started
-          </button>
-        </motion.div>
+          Get Started
+        </button>
       </section>
       {/* Features */}
       <section className="w-full bg-white flex flex-col items-center h-screen text-center justify-center">
