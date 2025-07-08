@@ -15,7 +15,7 @@ export default function Chip({ status, children }) {
 
   return (
     <div
-      className={`flex items-center justify-center gap-2 py-1 px-4 rounded-4xl ${statusColor[status]} border-2 w-fit mx-auto`}
+      className={`flex items-center justify-center gap-2 py-1 px-4 rounded-4xl ${statusColor[status]} border-1 w-fit mx-auto`}
     >
       {statusIcon[status]}
       <p className="text-sm font-medium">{children}</p>

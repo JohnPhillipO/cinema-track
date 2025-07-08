@@ -13,7 +13,7 @@ export default function Navbar() {
         <h1 className="font-semibold">Cinetracker</h1>
       </div>
       <nav className="hidden sm:flex sm:items-center sm:justify-center sm:gap-4">
-        <NavLink
+        {/* <NavLink
           to="/about"
           className={({ isActive }) =>
             `rounded-3xl transition-all duration-200 px-3 py-1 w-20 text-center text-gray-900 ${
@@ -24,7 +24,7 @@ export default function Navbar() {
           }
         >
           About
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/timer"
           className={({ isActive }) =>
