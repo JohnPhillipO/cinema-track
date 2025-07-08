@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import { useSound } from "use-sound";
+import notificationSound from "../assets/notification.mp3";
 
 export default function usePomodoroTimer(
   focusTime = 25 * 60,
   breakTime = 5 * 60,
   longBreakTime = 15 * 60,
-  pomodoros = 4
+  pomodoros = 4,
+  autoplay = false,
+  sound = true
 ) {
   const [time, setTime] = useState(focusTime);
   const [isRunning, setIsRunning] = useState(false);
@@ -12,6 +16,7 @@ export default function usePomodoroTimer(
   const [status, setStatus] = useState("active");
   const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
   const hasProcessedCompletion = useRef(false);
+  const [playNotification] = useSound(notificationSound);
 
   const prevSettings = useRef({
     focusTime,
@@ -26,9 +31,10 @@ export default function usePomodoroTimer(
       prevSettings.current.focusTime !== focusTime ||
       prevSettings.current.breakTime !== breakTime ||
       prevSettings.current.longBreakTime !== longBreakTime ||
-      prevSettings.current.pomodoros !== pomodoros
+      prevSettings.current.pomodoros !== pomodoros ||
+      prevSettings.current.autoplay !== autoplay ||
+      prevSettings.current.sound !== sound
     ) {
-      console.log("resetting timer");
       setTime(focusTime);
       setStatus("active");
       setPomodorosCompleted(0);
@@ -40,16 +46,31 @@ export default function usePomodoroTimer(
       breakTime,
       longBreakTime,
       pomodoros,
+      autoplay,
+      sound,
     };
-  }, [focusTime, breakTime, longBreakTime, pomodoros, isRunning]);
+  }, [
+    focusTime,
+    breakTime,
+    longBreakTime,
+    pomodoros,
+    isRunning,
+    autoplay,
+    sound,
+  ]);
 
   useEffect(() => {
-    if (isRunning) {
+    if (isRunning && status !== "completed") {
       intervalRef.current = setInterval(() => {
         setTime((prev) => {
           if (prev <= 0) {
             clearInterval(intervalRef.current);
-            setIsRunning(false);
+            if (!autoplay) {
+              setIsRunning(false);
+            }
+            if (sound) {
+              playNotification(); // Play notification sound
+            }
             if (status === "active") {
               // Check if the next pomodoro set is due
               if ((pomodorosCompleted + 1) % pomodoros === 0) {
@@ -63,18 +84,12 @@ export default function usePomodoroTimer(
             } else if (status === "break" && !hasProcessedCompletion.current) {
               hasProcessedCompletion.current = true;
               // Add 1 to pomodorosCompleted
-              setPomodorosCompleted((prev) => {
-                const newValue = prev + 1;
-                return newValue;
-              });
+              setPomodorosCompleted((prev) => prev + 1);
               setStatus("active");
             } else if (status === "longBreak") {
               hasProcessedCompletion.current = false;
               setStatus("completed");
-              setPomodorosCompleted((prev) => {
-                const newValue = prev + 1;
-                return newValue;
-              });
+              setPomodorosCompleted((prev) => prev + 1);
               return -1;
             }
             return pomodorosCompleted % pomodoros === 0
@@ -84,6 +99,9 @@ export default function usePomodoroTimer(
           return prev - 1;
         });
       }, 1000);
+    }
+    if (status === "completed") {
+      setIsRunning(false);
     }
     return () => clearInterval(intervalRef.current);
   }, [isRunning, status]);

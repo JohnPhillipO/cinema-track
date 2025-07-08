@@ -10,7 +10,7 @@ export default function Timer() {
     breakTime: 300,
     longBreakTime: 900,
     pomodoros: 4,
-    autoplay: false,
+    autoplay: true,
     sound: true,
   });
 

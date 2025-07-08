@@ -4,25 +4,30 @@ import { TimerContext } from "../../pages/Timer";
 export default function SettingsModal() {
   const { setShowSettings, setTimerSettings, timerSettings } =
     useContext(TimerContext);
+  const [localSettings, setLocalSettings] = useState({ ...timerSettings });
 
   // Handle form submission (just close the modal since settings are updated in real-time)
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setTimerSettings(localSettings);
     setShowSettings(false);
   };
 
   return (
     <div className="p-4 bg-white rounded-2xl shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Settings</h1>
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={(e) => handleFormSubmit(e)}
+        className="flex flex-col gap-4"
+      >
         <div className="flex flex-row items-center justify-between gap-10">
           <label htmlFor="focusTime">Focus Time (minutes)</label>
           <select
             name="focusTime"
             id="focusTime"
-            value={timerSettings.focusTime}
+            value={localSettings.focusTime}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 focusTime: parseInt(e.target.value),
               }));
@@ -38,9 +43,9 @@ export default function SettingsModal() {
           <select
             name="breakTime"
             id="breakTime"
-            value={timerSettings.breakTime}
+            value={localSettings.breakTime}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 breakTime: parseInt(e.target.value),
               }));
@@ -56,9 +61,9 @@ export default function SettingsModal() {
           <select
             name="longBreakTime"
             id="longBreakTime"
-            value={timerSettings.longBreakTime}
+            value={localSettings.longBreakTime}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 longBreakTime: parseInt(e.target.value),
               }));
@@ -73,9 +78,9 @@ export default function SettingsModal() {
           <select
             name="pomodoros"
             id="pomodoros"
-            value={timerSettings.pomodoros}
+            value={localSettings.pomodoros}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 pomodoros: parseInt(e.target.value),
               }));
@@ -94,9 +99,9 @@ export default function SettingsModal() {
             type="checkbox"
             name="autoplay"
             id="autoplay"
-            checked={timerSettings.autoplay}
+            checked={localSettings.autoplay}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 autoplay: e.target.checked,
               }));
@@ -110,9 +115,9 @@ export default function SettingsModal() {
             type="checkbox"
             name="sound"
             id="sound"
-            checked={timerSettings.sound}
+            checked={localSettings.sound}
             onChange={(e) => {
-              setTimerSettings((prev) => ({
+              setLocalSettings((prev) => ({
                 ...prev,
                 sound: e.target.checked,
               }));
@@ -126,14 +131,6 @@ export default function SettingsModal() {
             type="submit"
           >
             Save Settings
-          </button>
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 cursor-pointer"
-            onClick={() => {
-              setShowSettings(false);
-            }}
-          >
-            Close
           </button>
         </div>
       </form>

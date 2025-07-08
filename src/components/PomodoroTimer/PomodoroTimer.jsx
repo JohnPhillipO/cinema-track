@@ -18,7 +18,14 @@ export default function PomodoroTimer() {
     skipTimer,
     status,
     pomodorosCompleted,
-  } = usePomodoroTimer(focusTime, breakTime, longBreakTime, pomodoros);
+  } = usePomodoroTimer(
+    focusTime,
+    breakTime,
+    longBreakTime,
+    pomodoros,
+    autoplay,
+    sound
+  );
 
   // Style for buttons
   const statusPlayButtonStyle = {
