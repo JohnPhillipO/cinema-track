@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-center h-screen text-center font-inter bg-gray-50">
+      <section className="flex flex-col items-center justify-center h-screen text-center font-inter">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

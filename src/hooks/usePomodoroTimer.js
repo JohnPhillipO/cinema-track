@@ -63,14 +63,20 @@ export default function usePomodoroTimer(
     if (isRunning && status !== "completed") {
       intervalRef.current = setInterval(() => {
         setTime((prev) => {
+          // When the timer reaches 0, do the following:
           if (prev <= 0) {
             clearInterval(intervalRef.current);
             if (!autoplay) {
+              // If autoplay is true, keep the timer running
               setIsRunning(false);
             }
             if (sound) {
               playNotification(); // Play notification sound
             }
+            // if the status is active, do the following:
+            // Check if the next pomodoro set is due
+            // If it is, set the status to longBreak
+            // If it is not, set the status to break
             if (status === "active") {
               // Check if the next pomodoro set is due
               if ((pomodorosCompleted + 1) % pomodoros === 0) {
@@ -92,6 +98,8 @@ export default function usePomodoroTimer(
               setPomodorosCompleted((prev) => prev + 1);
               return -1;
             }
+            // If the pomodorosCompleted is a modular of pomodoros, set the time to focusTime
+            // Otherwise, set the time to longBreakTime
             return pomodorosCompleted % pomodoros === 0
               ? focusTime
               : longBreakTime;

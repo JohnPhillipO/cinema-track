@@ -18,7 +18,7 @@ export default function Timer() {
     <TimerContext.Provider
       value={{ showSettings, timerSettings, setShowSettings, setTimerSettings }}
     >
-      <section className="flex flex-col items-center justify-center h-screen text-center bg-gray-100">
+      <section className="flex flex-col items-center justify-center h-screen text-center">
         <h1 className="text-4xl font-bold pb-10">Pomodoro Timer</h1>
         <PomodoroTimer />
         <div

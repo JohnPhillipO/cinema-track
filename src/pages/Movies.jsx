@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import movieHeroImage from "../assets/movie-hero.jpg";
+import MovieCard from "../components/MovieCard";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+
+  //   Poster: "https://m.media-amazon.com/images/M/MV5BODIyMDdhNTgtNDlmOC00MjUxLWE2NDItODA5MTdkNzY3ZTdhXkEyXkFqcGc@._V1_SX300.jpg"
+  // ​​
+  // Title: "Batman Begins"
+  // ​​
+  // Type: "movie"
+  // ​​
+  // Year: "2005"
+  // ​​
+  // imdbID: "tt0372784"
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +53,8 @@ export default function Movies() {
     e.target.search.value = "";
   };
   return (
-    <section className="flex flex-col items-center justify-center text-center bg-gray-100 h-screen">
-      <div className="w-screen h-1/4 sm:h-1/3 absolute top-0 left-0 z- dark:brightness-30">
+    <section className="flex flex-col items-center justify-center text-center">
+      <div className="w-screen h-1/4 sm:h-1/3 absolute top-0 left-0 z-0 dark:brightness-30">
         <img
           src={movieHeroImage}
           alt="movie hero"
@@ -70,11 +81,15 @@ export default function Movies() {
       </form>
       {/* Movies */}
       {error && <div className="text-red-500 font-semibold my-4">{error}</div>}
-      <div className="flex flex-wrap justify-center items-center gap-4">
-        {movies.map((movie) => (
-          <h1 key={movie.imdbID}>{movie.Title}</h1>
-        ))}
-      </div>
+      {movies ? (
+        <div className="flex flex-wrap justify-center items-center gap-6 absolute top-1/2 pb-20 max-w-5xl">
+          {movies.map((movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-gray-500 font-semibold my-4">No movies found.</div>
+      )}
     </section>
   );
 }
