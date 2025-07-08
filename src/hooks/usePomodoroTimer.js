@@ -13,6 +13,36 @@ export default function usePomodoroTimer(
   const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
   const hasProcessedCompletion = useRef(false);
 
+  const prevSettings = useRef({
+    focusTime,
+    breakTime,
+    longBreakTime,
+    pomodoros,
+  });
+
+  // Reset timer when settings change
+  useEffect(() => {
+    if (
+      prevSettings.current.focusTime !== focusTime ||
+      prevSettings.current.breakTime !== breakTime ||
+      prevSettings.current.longBreakTime !== longBreakTime ||
+      prevSettings.current.pomodoros !== pomodoros
+    ) {
+      console.log("resetting timer");
+      setTime(focusTime);
+      setStatus("active");
+      setPomodorosCompleted(0);
+      setIsRunning(false);
+      hasProcessedCompletion.current = false;
+    }
+    prevSettings.current = {
+      focusTime,
+      breakTime,
+      longBreakTime,
+      pomodoros,
+    };
+  }, [focusTime, breakTime, longBreakTime, pomodoros, isRunning]);
+
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
@@ -21,6 +51,7 @@ export default function usePomodoroTimer(
             clearInterval(intervalRef.current);
             setIsRunning(false);
             if (status === "active") {
+              // Check if the next pomodoro set is due
               if ((pomodorosCompleted + 1) % pomodoros === 0) {
                 setStatus("longBreak");
                 return longBreakTime;
@@ -34,15 +65,17 @@ export default function usePomodoroTimer(
               // Add 1 to pomodorosCompleted
               setPomodorosCompleted((prev) => {
                 const newValue = prev + 1;
-                console.log(newValue);
                 return newValue;
               });
               setStatus("active");
             } else if (status === "longBreak") {
-              setStatus("active");
-              setPomodorosCompleted(0);
               hasProcessedCompletion.current = false;
-              return focusTime;
+              setStatus("completed");
+              setPomodorosCompleted((prev) => {
+                const newValue = prev + 1;
+                return newValue;
+              });
+              return -1;
             }
             return pomodorosCompleted % pomodoros === 0
               ? focusTime
@@ -56,6 +89,11 @@ export default function usePomodoroTimer(
   }, [isRunning, status]);
 
   const startTimer = () => {
+    if (status === "completed") {
+      setStatus("active");
+      setPomodorosCompleted(0);
+      setTime(focusTime);
+    }
     setIsRunning(true);
   };
 
@@ -73,12 +111,44 @@ export default function usePomodoroTimer(
     clearInterval(intervalRef.current);
   };
 
+  const skipTimer = () => {
+    if (status !== "completed") {
+      clearInterval(intervalRef.current);
+      hasProcessedCompletion.current = false;
+      setIsRunning(false);
+      if (status === "active") {
+        if (pomodorosCompleted === pomodoros - 1) {
+          setStatus("longBreak");
+          setTime(longBreakTime);
+        } else {
+          setTime(breakTime);
+          setStatus("break");
+        }
+      } else if (status === "break") {
+        setTime(focusTime);
+        setStatus("active");
+        setPomodorosCompleted((prev) => {
+          const newValue = prev + 1;
+          return newValue;
+        });
+      } else if (status === "longBreak") {
+        setStatus("completed");
+        setPomodorosCompleted((prev) => {
+          const newValue = prev + 1;
+          return newValue;
+        });
+        setTime(-1);
+      }
+    }
+  };
+
   return {
     time,
     isRunning,
     startTimer,
     stopTimer,
     resetTimer,
+    skipTimer,
     status,
     pomodorosCompleted,
   };
