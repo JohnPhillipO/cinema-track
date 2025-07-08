@@ -6,7 +6,7 @@ export default function LayoutRoute() {
     <>
       <Navbar />
       <main>
-        <Outlet />
+        <Outlet className="font-inter" />
       </main>
     </>
   );
