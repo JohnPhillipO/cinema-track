@@ -13,18 +13,6 @@ export default function Navbar() {
         <h1 className="font-semibold">Cinetracker</h1>
       </div>
       <nav className="hidden sm:flex sm:items-center sm:justify-center sm:gap-4">
-        {/* <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            `rounded-3xl transition-all duration-200 px-3 py-1 w-20 text-center text-gray-900 ${
-              isActive
-                ? "bg-gray-50 border-solid border-2 border-gray-300"
-                : "hover:border-solid hover:border-2 hover:border-gray-300"
-            }`
-          }
-        >
-          About
-        </NavLink> */}
         <NavLink
           to="/timer"
           className={({ isActive }) =>
@@ -49,10 +37,19 @@ export default function Navbar() {
         >
           Movies
         </NavLink>
+        <NavLink
+          to="/watchlist"
+          className={({ isActive }) =>
+            `rounded-3xl transition-all duration-200 px-3 py-1 w-24 text-center text-gray-900 ${
+              isActive
+                ? "bg-gray-50 border-solid border-2 border-gray-300"
+                : "hover:border-solid hover:border-2 hover:border-gray-300"
+            }`
+          }
+        >
+          Watchlist
+        </NavLink>
       </nav>
-      {/* {      <button className="hidden sm:block sm:bg-blue-400 sm:px-6 sm:py-2 sm:rounded-3xl sm:text-white sm:font-semibold cursor-pointer">
-        Sign in
-      </button>} */}
     </header>
   );
 }

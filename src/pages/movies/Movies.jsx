@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import movieHeroImage from "../assets/movie-hero.jpg";
+import movieHeroImage from "../../assets/movie-hero.jpg";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -9,7 +9,6 @@ export default function Movies() {
     e.preventDefault();
     // trim the search value
     const searchValue = e.target.search.value.trim().toLowerCase();
-    console.log(searchValue);
     // if the search value is empty, set the error and return
     if (!searchValue) {
       setMovies([]);
@@ -17,7 +16,6 @@ export default function Movies() {
       return;
     }
     try {
-      console.log("fetching movies");
       setError("");
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=${
@@ -26,11 +24,10 @@ export default function Movies() {
       );
       const data = await response.json();
       if (data.Response === "True") {
-        console.log(data.Search);
         setMovies(data.Search);
         setError("");
+        e.target.search.value = "";
       } else {
-        console.log("error response false");
         setMovies([]);
         setError(data.Error || "No results found.");
       }
@@ -39,11 +36,10 @@ export default function Movies() {
       setMovies([]);
       setError("Failed to fetch movies. Please try again later.");
     }
-    e.target.search.value = "";
   };
   return (
-    <section className="flex flex-col items-center justify-center text-center bg-gray-100 h-screen">
-      <div className="w-screen h-1/4 sm:h-1/3 absolute top-0 left-0 z- dark:brightness-30">
+    <section className="flex flex-col items-center justify-center h-screen text-center bg-gray-100">
+      <div className="w-screen h-1/4 sm:h-1/3 absolute top-0 left-0 z-0 dark:brightness-30">
         <img
           src={movieHeroImage}
           alt="movie hero"
