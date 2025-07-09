@@ -33,7 +33,6 @@ export default function SettingsModal() {
               }));
             }}
           >
-            <option value="900">15 Min</option>
             <option value="1500">25 Min</option>
             <option value="3000">50 Min</option>
           </select>
@@ -52,8 +51,7 @@ export default function SettingsModal() {
             }}
           >
             <option value="300">5 Min</option>
-            <option value="600">10 Min</option>
-            <option value="900">15 Min</option>
+            <option value="900">10 Min</option>
           </select>
         </div>
         <div className="flex flex-row items-center justify-between gap-10">
@@ -87,9 +85,7 @@ export default function SettingsModal() {
             }}
           >
             <option value="2">2 Sets</option>
-            <option value="3">3 Sets</option>
             <option value="4">4 Sets</option>
-            <option value="5">5 Sets</option>
           </select>
         </div>
         {/* Autoplay */}
