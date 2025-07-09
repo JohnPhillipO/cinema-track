@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Timer from "./pages/Timer";
 import Movies from "./pages/Movies";
 import Watchlist from "./pages/Watchlist";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="movies" element={<Movies />} />
           <Route path="watchlist" element={<Watchlist />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

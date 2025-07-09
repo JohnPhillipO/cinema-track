@@ -78,10 +78,10 @@ export default function Timer() {
               </div>
             ) : (
               <div className="text-gray-500 my-4">
-                Add some
+                Add some{" "}
                 <a href="/movies" className="underline font-bold">
                   movies
-                </a>
+                </a>{" "}
                 in your watchlist.
               </div>
             )}
