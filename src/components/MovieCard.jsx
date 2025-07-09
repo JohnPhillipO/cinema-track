@@ -3,6 +3,7 @@ import { FiPlus, FiCheck } from "react-icons/fi";
 
 export default function MovieCard({ movie }) {
   const [inWatchlist, setInWatchlist] = useState(false);
+  const currentURL = window.location.pathname;
 
   useEffect(() => {
     const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
@@ -31,20 +32,30 @@ export default function MovieCard({ movie }) {
 
   return (
     <div className="flex flex-col items-center justify-center hover:scale-105 transition-all duration-300 relative">
-      <button
-        aria-label={inWatchlist ? "Remove from Watchlist" : "Save to Watchlist"}
-        className={`absolute top-2 right-2 z-10 bg-white rounded-full p-2 shadow-md group transition-colors duration-200 ${
-          inWatchlist ? "hover:bg-blue-600" : "hover:bg-blue-600"
-        }`}
-        style={{ outline: "none" }}
-        onClick={handleToggleWatchlist}
-      >
-        {inWatchlist ? (
-          <FiCheck className="text-blue-600 group-hover:text-white" size={20} />
-        ) : (
-          <FiPlus className="text-blue-600 group-hover:text-white" size={20} />
-        )}
-      </button>
+      {currentURL !== "/timer" && (
+        <button
+          aria-label={
+            inWatchlist ? "Remove from Watchlist" : "Save to Watchlist"
+          }
+          className={`absolute top-2 right-2 z-10 bg-white rounded-full p-2 shadow-md group transition-colors duration-200 ${
+            inWatchlist ? "hover:bg-blue-600" : "hover:bg-blue-600"
+          }`}
+          style={{ outline: "none" }}
+          onClick={handleToggleWatchlist}
+        >
+          {inWatchlist ? (
+            <FiCheck
+              className="text-blue-600 group-hover:text-white"
+              size={20}
+            />
+          ) : (
+            <FiPlus
+              className="text-blue-600 group-hover:text-white"
+              size={20}
+            />
+          )}
+        </button>
+      )}
       <img
         src={movie.Poster}
         alt={movie.Title}

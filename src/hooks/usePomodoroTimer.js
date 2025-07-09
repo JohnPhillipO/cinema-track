@@ -16,7 +16,9 @@ export default function usePomodoroTimer(
   const [status, setStatus] = useState("active");
   const [pomodorosCompleted, setPomodorosCompleted] = useState(0);
   const hasProcessedCompletion = useRef(false);
+  const hasProcessedReward = useRef(false);
   const [playNotification] = useSound(notificationSound);
+  let rewards = JSON.parse(localStorage.getItem("rewards")) || 0;
 
   const prevSettings = useRef({
     focusTime,
@@ -24,6 +26,14 @@ export default function usePomodoroTimer(
     longBreakTime,
     pomodoros,
   });
+
+  const handleAddReward = () => {
+    if (!hasProcessedReward.current) {
+      rewards++;
+      localStorage.setItem("rewards", JSON.stringify(rewards));
+      hasProcessedReward.current = true;
+    }
+  };
 
   // Reset timer when settings change
   useEffect(() => {
@@ -81,6 +91,7 @@ export default function usePomodoroTimer(
               // Check if the next pomodoro set is due
               if ((pomodorosCompleted + 1) % pomodoros === 0) {
                 setStatus("longBreak");
+                hasProcessedReward.current = false;
                 return longBreakTime;
               } else {
                 setStatus("break");
@@ -96,6 +107,8 @@ export default function usePomodoroTimer(
               hasProcessedCompletion.current = false;
               setStatus("completed");
               setPomodorosCompleted((prev) => prev + 1);
+              // Add 1 to rewards
+              handleAddReward();
               return -1;
             }
             // If the pomodorosCompleted is a modular of pomodoros, set the time to focusTime
@@ -177,5 +190,6 @@ export default function usePomodoroTimer(
     skipTimer,
     status,
     pomodorosCompleted,
+    rewards, // Used to get rewards
   };
 }

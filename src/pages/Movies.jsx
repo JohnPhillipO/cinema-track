@@ -6,21 +6,10 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
 
-  //   Poster: "https://m.media-amazon.com/images/M/MV5BODIyMDdhNTgtNDlmOC00MjUxLWE2NDItODA5MTdkNzY3ZTdhXkEyXkFqcGc@._V1_SX300.jpg"
-  // ​​
-  // Title: "Batman Begins"
-  // ​​
-  // Type: "movie"
-  // ​​
-  // Year: "2005"
-  // ​​
-  // imdbID: "tt0372784"
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     // trim the search value
     const searchValue = e.target.search.value.trim().toLowerCase();
-    console.log(searchValue);
     // if the search value is empty, set the error and return
     if (!searchValue) {
       setMovies([]);
@@ -28,7 +17,6 @@ export default function Movies() {
       return;
     }
     try {
-      console.log("fetching movies");
       setError("");
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=${
@@ -37,16 +25,13 @@ export default function Movies() {
       );
       const data = await response.json();
       if (data.Response === "True") {
-        console.log(data.Search);
         setMovies(data.Search);
         setError("");
       } else {
-        console.log("error response false");
         setMovies([]);
         setError(data.Error || "No results found.");
       }
     } catch (error) {
-      console.error("Failed to fetch movies:", error);
       setMovies([]);
       setError("Failed to fetch movies. Please try again later.");
     }
@@ -80,7 +65,11 @@ export default function Movies() {
         </button>
       </form>
       {/* Movies */}
-      {error && <div className="text-red-500 font-semibold my-4">{error}</div>}
+      <div className="absolute top-1/2 pb-20 flex flex-col items-center justify-center">
+        {error && (
+          <div className="text-red-500 font-semibold my-4">{error}</div>
+        )}
+      </div>
       {movies ? (
         <div className="flex flex-wrap justify-center items-center gap-6 absolute top-1/2 pb-20 max-w-5xl">
           {movies.map((movie) => (
