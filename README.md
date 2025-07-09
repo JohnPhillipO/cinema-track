@@ -76,12 +76,12 @@ npm run dev
 
 ## ⭐ Coming soon features
 
-[ ] Have account functionality
-[ ] Save watchlist to an actual database instead of localstorage
-[ ] Setup OAuth2 authentication
-[ ] Anime Support
-[ ] Save and monitor productivity
-[ ] Saved list of movies watched, and reviews
+- [ ] Have account functionality
+- [ ] Save watchlist to an actual database instead of localstorage
+- [ ] Setup OAuth2 authentication
+- [ ] Anime Support
+- [ ] Save and monitor productivity
+- [ ] Saved list of movies watched, and reviews
 
 ---
 
