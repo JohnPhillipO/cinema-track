@@ -13,7 +13,7 @@ export default function Navbar() {
         onClick={() => navigate("/")}
       >
         <RxLapTimer className="text-4xl" />
-        <h1 className="font-semibold">Cinetracker</h1>
+        <h1 className="font-semibold">CineTracker</h1>
       </div>
       <div className="absolute left-1/2 -translate-x-1/2">
         <nav className="hidden md:flex md:items-center md:justify-center md:gap-4">

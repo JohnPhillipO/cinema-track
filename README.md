@@ -1,12 +1,94 @@
-# React + Vite
+# 🎬 CineTracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CineTracker** is a productivity-focused web app that combines the power of the Pomodoro technique with a personalized movie/TV watchlist. Earn your screen time by staying focused, it's a guilt-free way to enjoy your favorite content.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ⏱️ **Pomodoro Timer** – Customizable work and break sessions to boost focus.
+- 🎥 **Watchlist Manager** – Add movies and shows to watchlist using the OMDb API.
+- 🎁 **Reward System** – Earn "watch tokens" after completing focus sessions. Use those tokens to unlock your watchlist.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Framer Motion](https://www.framer.com/motion/) _(for animations)_
+
+## Backend
+
+- Coming soon...
+
+### APIs & Tools
+
+- [OMDb API](https://www.omdbapi.com/) – Movie & TV data
+- [Vercel](https://vercel.com/)
+
+---
+
+## 🧠 How It Works
+
+1. **Set your focus settings** (e.g., 25 minutes work, 5 minutes break).
+2. **Complete Pomodoro sets** to earn watch time.
+3. **Search and Add shows/movies to your watchlist** via OMDb.
+4. **Spend tokens** to watch, guilt-free!
+
+---
+
+## 📦 Local Setup
+
+1. **Clone the repo**
+
+```bash
+git clone https://github.com/your-username/cinetrack-pro.git
+cd cinetrack-pro
+```
+
+2. \*\*Install Dependencies
+
+```bash
+npm install
+```
+
+3. Configure enviornment variables (Free)
+   Create an `.env` file with:
+
+```bash
+VITE_TMDB_API_KEY=your_tmdb_key
+```
+
+1. Run the development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 📸 Preview
+
+## ⭐ Coming soon features
+
+[ ] Have account functionality
+[ ] Save watchlist to an actual database instead of localstorage
+[ ] Setup OAuth2 authentication
+[ ] Anime Support
+[ ] Save and monitor productivity
+[ ] Saved list of movies watched, and reviews
+
+---
+
+## 🙏 Credits
+
+Created with ❤️ by John Phillip Ostiano
+
+---
+
+This project is licensed under the MIT License.
