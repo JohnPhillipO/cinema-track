@@ -76,5 +76,3 @@ npm run dev
 ## 🙏 Credits
 
 Created with ❤️ by John Phillip Ostiano
-
-This project is licensed under the MIT License.
